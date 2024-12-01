@@ -1,7 +1,14 @@
-import "./App.css";
+import { useContext } from "react";
+import { CitiesContext } from "./weather-tracker/cities-context";
+import Splashscreen from "./components/Splashscreen";
+import Dashboard from "./components/Dashboard";
 
-function App() {
-  return <></>;
+export default function App() {
+  const { isLoadingCities, error } = useContext(CitiesContext);
+  return (
+    <>
+      {(isLoadingCities || error) && <Splashscreen error={error} />}
+      {!isLoadingCities && !error && <p>Done loading!</p>}
+    </>
+  );
 }
-
-export default App;
