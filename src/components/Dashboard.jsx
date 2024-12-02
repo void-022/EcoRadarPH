@@ -1,3 +1,15 @@
-export default function Dashboard() {
-  return <h1> HI, IM A DASHBOARD!</h1>;
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/Sidebar/AppSidebar";
+
+export default function Dashboard({ children }) {
+  return (
+    <SidebarProvider>
+      <AppSidebar />
+      <main>
+        <SidebarTrigger />
+        {children}
+        <div className="h-48 w-48 bg-red-600"></div>
+      </main>
+    </SidebarProvider>
+  );
 }

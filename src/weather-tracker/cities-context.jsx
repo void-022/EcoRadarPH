@@ -14,7 +14,7 @@ export default function CitiesContextProvider({ children }) {
     async function fetchCities() {
       try {
         const response = await fetch("/CITIES.json");
-        // await new Promise((resolve) => setTimeout(resolve, 3000));  use to simulate loading splashscreen or use network throttling on browser
+        // await new Promise((resolve) => setTimeout(resolve, 3000)); //use to simulate loading splashscreen or use network throttling on browser
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }

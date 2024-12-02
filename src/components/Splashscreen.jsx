@@ -1,9 +1,6 @@
 export default function Splashscreen({ error }) {
   return (
-    <div
-      className="flex flex-col content-center items-center gap-y-9"
-      style={{ textAlign: "center", marginTop: "20%" }}
-    >
+    <div className="flex flex-col items-center gap-y-8 pt-64">
       {error && (
         <>
           <p className="text-xl text-red-900">{error.message}</p>

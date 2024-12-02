@@ -8,7 +8,7 @@ export default function App() {
   return (
     <>
       {(isLoadingCities || error) && <Splashscreen error={error} />}
-      {!isLoadingCities && !error && <p>Done loading!</p>}
+      {!isLoadingCities && !error && <Dashboard />}
     </>
   );
 }
