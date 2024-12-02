@@ -70,7 +70,7 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>ClimateTrack</SidebarGroupLabel>
+          <SidebarGroupLabel>EcoRadarPH</SidebarGroupLabel>
           <SidebarMenu>
             <SidebarMenuItem>
               <Sheet>
