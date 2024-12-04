@@ -86,7 +86,7 @@ export function AppSidebar() {
                   <SheetHeader>
                     <SheetTitle>User Settings</SheetTitle>
                     <SheetDescription>
-                      Make changes to your configuration here.
+                      Update your location and app theme here
                     </SheetDescription>
                   </SheetHeader>
                   <div className="mb-3 mt-3 flex flex-wrap items-center gap-y-3">
