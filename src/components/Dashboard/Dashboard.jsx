@@ -5,6 +5,82 @@ import { AppSidebar } from "@/components/Sidebar/AppSidebar";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/hooks/use-toast";
 import DashboardHeader from "./DashboardHeader";
+import DailyWeather from "./DailyWeather";
+
+function interpretWMO(WMO) {
+  switch (WMO) {
+    case 0:
+      return { interpretation: "Clear sky", icon: "wi-day-sunny" };
+    case 1:
+      return { interpretation: "Partly cloudy", icon: "wi-cloudy" };
+    case 2:
+      return { interpretation: "Partly cloudy", icon: "wi-cloudy" };
+    case 3:
+      return { interpretation: "Partly cloudy", icon: "wi-cloudy" };
+    case 45:
+      return { interpretation: "Foggy", icon: "wi-fog" };
+    case 48:
+      return { interpretation: "Foggy", icon: "wi-fog" };
+    case 51:
+      return { interpretation: "Light drizzle", icon: "wi-sprinkle" };
+    case 53:
+      return { interpretation: "Moderate drizzle", icon: "wi-sleet" };
+    case 55:
+      return { interpretation: "Heavy drizzle", icon: "wi-sleet" };
+    case 56:
+      return { interpretation: "Light freezing drizzle", icon: "wi-snow-wind" };
+    case 57:
+      return {
+        interpretation: "Moderate freezing drizzle",
+        icon: "wi-snow-wind",
+      };
+    case 61:
+      return { interpretation: "Light rain", icon: "wi-rain" };
+    case 63:
+      return { interpretation: "Moderate rain", icon: "wi-rain" };
+    case 65:
+      return { interpretation: "Heavy rain", icon: "wi-rain" };
+    case 66:
+      return { interpretation: "Light freezing rain", icon: "wi-snow-wind" };
+    case 67:
+      return { interpretation: "Moderate freezing rain", icon: "wi-snow-wind" };
+    case 71:
+      return { interpretation: "Light snow fall", icon: "wi-snow" };
+    case 73:
+      return { interpretation: "Moderate snow fall", icon: "wi-snow" };
+    case 75:
+      return { interpretation: "Heavy snow fall", icon: "wi-snow" };
+    case 77:
+      return { interpretation: "Snow grains", icon: "wi-snow" };
+    case 80:
+      return { interpretation: "Light rain showers", icon: "wi-showers" };
+    case 81:
+      return { interpretation: "Moderate rain showers", icon: "wi-showers" };
+    case 82:
+      return { interpretation: "Heavy rain showers", icon: "wi-showers" };
+    case 85:
+      return { interpretation: "Light snow showers", icon: "wi-snow-wind" };
+    case 86:
+      return { interpretation: "Heavy snow showers", icon: "wi-snow-wind" };
+    case 95:
+      return {
+        interpretation: "Moderate thunderstorm",
+        icon: "wi-storm-showers",
+      };
+    case 96:
+      return {
+        interpretation: "Thunderstorm with moderate hail",
+        icon: "wi-thunderstorm",
+      };
+    case 99:
+      return {
+        interpretation: "Thunderstorm with heavy hail",
+        icon: "wi-thunderstorm",
+      };
+    default:
+      return { interpretation: "", icon: "" };
+  }
+}
 
 export default function Dashboard({ ...props }) {
   const { userCityName, userLat, userLon } = useContext(UserConfigContext);
@@ -16,7 +92,7 @@ export default function Dashboard({ ...props }) {
     async function fetchData() {
       if (!userLat || !userLon) return;
       setIsFetching(true);
-      const weatherAPI = `https://api.open-meteo.com/v1/forecast?latitude=${userLat}&longitude=${userLon}&current=temperature_2m,apparent_temperature,weather_code&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_probability_max&forecast_days=1`;
+      const weatherAPI = `https://api.open-meteo.com/v1/forecast?latitude=${userLat}&longitude=${userLon}&current=temperature_2m,apparent_temperature,weather_code&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_probability_max`;
       const airAPI = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${userLat}&longitude=${userLon}&hourly=pm10,pm2_5,nitrogen_dioxide,ozone,us_aqi&forecast_days=3`;
       const floodAPI = `https://flood-api.open-meteo.com/v1/flood?latitude=${userLat}&longitude=${userLon}&daily=river_discharge_mean,river_discharge_max&forecast_days=31`;
 
@@ -58,20 +134,27 @@ export default function Dashboard({ ...props }) {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main {...props} className="flex w-screen flex-col gap-2 md:flex-row">
-        <div className="md:flex-2 flex min-h-screen w-full flex-col gap-2 md:w-2/3">
+      <main {...props} className="flex w-screen flex-col gap-1 md:flex-row">
+        <div className="md:flex-2 flex min-h-screen w-full flex-col gap-1 md:w-2/3">
           <header className="h-1/3 bg-neutral-600 md:h-2/6">
             <SidebarTrigger />
             <DashboardHeader
               currentData={apiData.weather.current}
               isFetching={isFetching}
+              interpretWMO={interpretWMO}
             />
           </header>
-          <section className="h-1/3 bg-slate-400 md:h-2/6"></section>
+          <section className="h-1/3 bg-slate-400 p-1 md:h-2/6">
+            <DailyWeather
+              dailyData={apiData.weather.daily}
+              isFetching={isFetching}
+              interpretWMO={interpretWMO}
+            />
+          </section>
           <section className="h-1/3 bg-neutral-600 md:h-2/6"></section>
         </div>
 
-        <aside className="flex min-h-96 w-full flex-col gap-2 border-solid md:w-1/3 md:flex-1">
+        <aside className="flex min-h-96 w-full flex-col gap-1 border-solid md:w-1/3 md:flex-1">
           <section className="h-3/5 bg-red-300">hallo</section>
           <section className="h-2/5 bg-slate-400">hallo</section>
         </aside>
