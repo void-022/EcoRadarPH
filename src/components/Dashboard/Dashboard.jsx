@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/hooks/use-toast";
 import DashboardHeader from "./DashboardHeader";
 import DailyWeather from "./DailyWeather";
+import HourlyForecast from "./Hourly/HourlyForecast";
 
 function interpretWMO(WMO) {
   switch (WMO) {
@@ -82,10 +83,47 @@ function interpretWMO(WMO) {
   }
 }
 
+function interpretDate(dateString, format) {
+  const date = new Date(dateString);
+
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const month = months[date.getMonth()];
+  const day = date.getDate();
+  const year = date.getFullYear();
+  const hours = date.getHours();
+  const minutes = date.getMinutes().toString().padStart(2, "0"); // Add leading zero to minutes if needed
+
+  // Format hours into 12-hour clock and determine AM/PM
+  const period = hours >= 12 ? "PM" : "AM";
+  const hour12 = hours % 12 || 12; // Convert 0 or 24-hour to 12-hour format
+
+  // Combine into the desired format
+  if (format === "monthDate") {
+    return `${month} ${day}`;
+  }
+  if (format === "time") {
+    return `${hour12}:${minutes} ${period}`;
+  }
+  return `${month} ${day}, ${year} ${hour12}:${minutes} ${period}`;
+}
+
 export default function Dashboard({ ...props }) {
   const { userCityName, userLat, userLon } = useContext(UserConfigContext);
   const [apiData, setApiData] = useState({ weather: "", air: "", flood: "" });
-  const [isFetching, setIsFetching] = useState(false);
+  const [isFetching, setIsFetching] = useState(true);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -136,7 +174,7 @@ export default function Dashboard({ ...props }) {
       <AppSidebar />
       <main {...props} className="flex w-screen flex-col gap-1 md:flex-row">
         <div className="md:flex-2 flex min-h-screen w-full flex-col gap-1 md:w-2/3">
-          <header className="h-1/3 bg-neutral-600 md:h-2/6">
+          <header className="h-1/4 bg-neutral-600 md:h-2/6">
             <SidebarTrigger />
             <DashboardHeader
               currentData={apiData.weather.current}
@@ -149,14 +187,24 @@ export default function Dashboard({ ...props }) {
               dailyData={apiData.weather.daily}
               isFetching={isFetching}
               interpretWMO={interpretWMO}
+              interpretDate={interpretDate}
             />
           </section>
-          <section className="h-1/3 bg-neutral-600 md:h-2/6"></section>
+          <section className="h-2/4 bg-neutral-900 p-1 md:h-1/3">
+            <HourlyForecast
+              hourlyData={{
+                weather: apiData.weather.hourly,
+                airQuality: apiData.air.hourly,
+              }}
+              isFetching={isFetching}
+              interpretDate={interpretDate}
+            />
+          </section>
         </div>
 
         <aside className="flex min-h-96 w-full flex-col gap-1 border-solid md:w-1/3 md:flex-1">
-          <section className="h-3/5 bg-red-300">hallo</section>
-          <section className="h-2/5 bg-slate-400">hallo</section>
+          <section className="h-3/5 bg-red-300 p-1">hallo</section>
+          <section className="h-2/5 bg-slate-400 p-1">hallo</section>
         </aside>
       </main>
       <Toaster />

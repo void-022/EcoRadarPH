@@ -12,7 +12,7 @@ export default function DashboardHeader({
     return <div></div>; //Placeholder while loading
   }
   return (
-    <div className="flex min-h-64 flex-row p-6 pt-0 md:pl-11 md:pt-4">
+    <div className="flex min-h-[90%] flex-row p-6 pt-0 md:min-h-64 md:pl-11 md:pt-4">
       <div className="flex flex-1 flex-col justify-around md:justify-between">
         <h1 className="text-2xl font-bold md:text-4xl">
           {userCityName.toUpperCase()}

@@ -7,12 +7,17 @@ import {
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
 
-export default function DailyWeather({ dailyData, isFetching, interpretWMO }) {
+export default function DailyWeather({
+  dailyData,
+  isFetching,
+  interpretWMO,
+  interpretDate,
+}) {
   if (isFetching || !dailyData) {
     return <div></div>; //Placeholder while loading
   }
   const dailyWeather = dailyData.time.map((date, index) => ({
-    date,
+    date: interpretDate(date, "monthDate"),
     weatherCode: dailyData.weather_code[index],
     avgTemp:
       (Math.round(
