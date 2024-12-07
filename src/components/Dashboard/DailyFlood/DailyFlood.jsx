@@ -22,7 +22,7 @@ export default function DailyFlood({
   function handleSelectForecastLength(newLength) {
     setSelectedForecastLength(newLength);
   }
-  console.log(monthFloodData);
+
   return (
     <div className="flex min-h-full flex-col justify-between rounded-lg bg-white p-2">
       <div className="flex h-10 w-full justify-between">

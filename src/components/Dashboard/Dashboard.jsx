@@ -8,6 +8,7 @@ import DashboardHeader from "./DashboardHeader";
 import DailyWeather from "./DailyWeather";
 import HourlyForecast from "./Hourly/HourlyForecast";
 import DailyFlood from "./DailyFlood/DailyFlood";
+import DailyAir from "./DailyAir/DailyAir";
 
 function interpretWMO(WMO) {
   switch (WMO) {
@@ -101,7 +102,24 @@ function interpretDate(dateString, format) {
     "Nov",
     "Dec",
   ];
+
+  const fullMonths = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
   const month = months[date.getMonth()];
+  const fullMonth = fullMonths[date.getMonth()];
   const day = date.getDate();
   const year = date.getFullYear();
   const hours = date.getHours();
@@ -114,6 +132,9 @@ function interpretDate(dateString, format) {
   // Combine into the desired format
   if (format === "monthDate") {
     return `${month} ${day}`;
+  }
+  if (format === "fullMonthDate") {
+    return `${fullMonth} ${day}`;
   }
   if (format === "time") {
     return `${hour12}:${minutes} ${period}`;
@@ -132,7 +153,7 @@ export default function Dashboard({ ...props }) {
       if (!userLat || !userLon) return;
       setIsFetching(true);
       const weatherAPI = `https://api.open-meteo.com/v1/forecast?latitude=${userLat}&longitude=${userLon}&current=temperature_2m,apparent_temperature,weather_code&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_probability_max&timezone=auto`;
-      const airAPI = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${userLat}&longitude=${userLon}&hourly=pm10,pm2_5,nitrogen_dioxide,ozone,us_aqi&forecast_days=3&timezone=auto`;
+      const airAPI = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${userLat}&longitude=${userLon}&hourly=pm10,pm2_5,nitrogen_dioxide,ozone,us_aqi&timezone=auto`;
       const floodAPI = `https://flood-api.open-meteo.com/v1/flood?latitude=${userLat}&longitude=${userLon}&daily=river_discharge,river_discharge_max&forecast_days=31`;
 
       try {
@@ -148,7 +169,7 @@ export default function Dashboard({ ...props }) {
           floodResponse.json(),
         ]);
         setApiData({ weather: weatherData, air: airData, flood: floodData });
-        console.log(weatherData);
+
         setIsFetching(false);
       } catch (err) {
         toast({
@@ -204,7 +225,13 @@ export default function Dashboard({ ...props }) {
         </div>
 
         <aside className="flex min-h-96 w-full flex-col gap-1 border-solid md:w-1/3 md:flex-1">
-          <section className="h-full bg-red-300 p-1 md:h-3/5">hallo</section>
+          <section className="h-full bg-red-300 p-1 md:h-3/5">
+            <DailyAir
+              dailyAirData={apiData.air.hourly}
+              isFetching={isFetching}
+              interpretDate={interpretDate}
+            />
+          </section>
           <section className="h-full bg-slate-400 p-1 md:h-2/5">
             <DailyFlood
               dailyFloodData={apiData.flood.daily}
