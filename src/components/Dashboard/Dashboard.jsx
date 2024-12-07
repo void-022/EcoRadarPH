@@ -7,6 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import DashboardHeader from "./DashboardHeader";
 import DailyWeather from "./DailyWeather";
 import HourlyForecast from "./Hourly/HourlyForecast";
+import DailyFlood from "./DailyFlood/DailyFlood";
 
 function interpretWMO(WMO) {
   switch (WMO) {
@@ -130,9 +131,9 @@ export default function Dashboard({ ...props }) {
     async function fetchData() {
       if (!userLat || !userLon) return;
       setIsFetching(true);
-      const weatherAPI = `https://api.open-meteo.com/v1/forecast?latitude=${userLat}&longitude=${userLon}&current=temperature_2m,apparent_temperature,weather_code&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_probability_max`;
-      const airAPI = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${userLat}&longitude=${userLon}&hourly=pm10,pm2_5,nitrogen_dioxide,ozone,us_aqi&forecast_days=3`;
-      const floodAPI = `https://flood-api.open-meteo.com/v1/flood?latitude=${userLat}&longitude=${userLon}&daily=river_discharge_mean,river_discharge_max&forecast_days=31`;
+      const weatherAPI = `https://api.open-meteo.com/v1/forecast?latitude=${userLat}&longitude=${userLon}&current=temperature_2m,apparent_temperature,weather_code&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_probability_max&timezone=auto`;
+      const airAPI = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${userLat}&longitude=${userLon}&hourly=pm10,pm2_5,nitrogen_dioxide,ozone,us_aqi&forecast_days=3&timezone=auto`;
+      const floodAPI = `https://flood-api.open-meteo.com/v1/flood?latitude=${userLat}&longitude=${userLon}&daily=river_discharge,river_discharge_max&forecast_days=31`;
 
       try {
         const [weatherResponse, airResponse, floodResponse] = await Promise.all(
@@ -173,7 +174,7 @@ export default function Dashboard({ ...props }) {
     <SidebarProvider>
       <AppSidebar />
       <main {...props} className="flex w-screen flex-col gap-1 md:flex-row">
-        <div className="md:flex-2 flex min-h-screen w-full flex-col gap-1 md:w-2/3">
+        <div className="flex min-h-screen w-full flex-col gap-1 md:w-2/3">
           <header className="h-1/4 bg-neutral-600 md:h-2/6">
             <SidebarTrigger />
             <DashboardHeader
@@ -203,8 +204,14 @@ export default function Dashboard({ ...props }) {
         </div>
 
         <aside className="flex min-h-96 w-full flex-col gap-1 border-solid md:w-1/3 md:flex-1">
-          <section className="h-3/5 bg-red-300 p-1">hallo</section>
-          <section className="h-2/5 bg-slate-400 p-1">hallo</section>
+          <section className="h-full bg-red-300 p-1 md:h-3/5">hallo</section>
+          <section className="h-full bg-slate-400 p-1 md:h-2/5">
+            <DailyFlood
+              dailyFloodData={apiData.flood.daily}
+              isFetching={isFetching}
+              interpretDate={interpretDate}
+            />
+          </section>
         </aside>
       </main>
       <Toaster />

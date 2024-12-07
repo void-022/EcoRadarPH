@@ -3,18 +3,7 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart"; // Adjust the path if necessary
-
-// const chartConfig = {
-//   desktop: {
-//     label: "Desktop",
-//     color: "#2563eb",
-//   },
-//   mobile: {
-//     label: "Mobile",
-//     color: "#60a5fa",
-//   },
-// };
+} from "@/components/ui/chart";
 
 export default function HourlyChart({ chartData, chartLabel, interpretDate }) {
   let twentyFourHourData = chartData.slice(0, 24);
@@ -25,11 +14,8 @@ export default function HourlyChart({ chartData, chartLabel, interpretDate }) {
 
   const chartConfig = {
     label: chartLabel,
-    color: "#60a5fa",
+    color: "hsl(var(--chart-1))",
   };
-
-  console.log(chartLabel);
-  console.log(twentyFourHourData);
 
   return (
     <ChartContainer
