@@ -46,7 +46,7 @@
     --primary-foreground: 199 89% 48%;
     --secondary: 211 80 68%;
     --secondary-foreground: 246 100% 96%;
-    --muted: 0 0% 14.9%;
+    --muted: 0 0% 24%;
     --muted-foreground: 0 0% 63.9%;
     --accent: 211 80 68%;
     --accent-foreground: 246 100% 96%;
@@ -54,7 +54,7 @@
     --destructive-foreground: 246 100% 96%;
     --border: 203 90 10%;
     --input: 222 100% 70%;
-    --ring: 0 0% 83.1%;
+    --ring: 0 0% 11%;
     --chart-1: 211 80 68%;
     --chart-2: 36 0 240%;
     --chart-3: 249 55 45%;
