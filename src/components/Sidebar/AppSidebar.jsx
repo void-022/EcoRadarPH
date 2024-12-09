@@ -35,28 +35,15 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-  SheetFooter,
-  SheetClose,
 } from "@/components/ui/sheet";
 
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
 
 import CitiesCombobox from "./CitiesCombobox";
 import LocationButton from "./LocationButton";
@@ -76,8 +63,8 @@ export function AppSidebar() {
               <Sheet>
                 <SheetTrigger className="w-full">
                   <SidebarMenuButton>
-                    <p className="flex items-center">
-                      <Settings className="inline h-[1.2em]" />
+                    <p className="flex items-center text-base">
+                      <Settings className="inline h-[1.1em]" />
                       Settings
                     </p>
                   </SidebarMenuButton>
@@ -94,10 +81,6 @@ export function AppSidebar() {
                       <div className="flex items-center gap-x-2">
                         <CitiesCombobox className="flex-1" />
                         <span>OR</span>
-                        {/* <Button>
-                          <MapPinned />
-                          Use Current Location
-                        </Button> */}
                         <LocationButton />
                       </div>
                     </div>
@@ -120,21 +103,16 @@ export function AppSidebar() {
                       </div>
                     </div>
                   </div>
-                  {/* <SheetFooter>
-                    <SheetClose asChild>
-                      <Button>Save changes</Button>
-                    </SheetClose>
-                  </SheetFooter> */}
                 </SheetContent>
               </Sheet>
             </SidebarMenuItem>
 
-            <SidebarMenuItem>
+            {/* <SidebarMenuItem>
               <SidebarMenuButton>
                 <a
                   href="https://github.com/void-022"
                   className="flex items-center" // Flex container with spacing
-                  target
+                  target="_blank"
                 >
                   <Github className="h-[1.2em]" />
                   <span>Github</span>
@@ -155,9 +133,31 @@ export function AppSidebar() {
                   <ExternalLink className="ml-1 h-[0.8em]" />
                 </a>
               </SidebarMenuButton>
+            </SidebarMenuItem> */}
+
+            <SidebarMenuItem>
+              <a
+                href="https://github.com/void-022/EcoRadarPH"
+                className="flex items-center rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+                target="_blank"
+              >
+                <Github className="ml-1 h-[1em]" />
+                <span className="text-base">Github</span>
+                <ExternalLink className="ml-1 h-[0.7em]" />
+              </a>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <a
+                href="../../about.html"
+                className="flex items-center rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+                target="_blank"
+              >
+                <Info className="ml-1 h-[1em]" />
+                <span className="text-base">About EcoTrackPH</span>
+                <ExternalLink className="ml-1 h-[0.7em]" />
+              </a>
             </SidebarMenuItem>
           </SidebarMenu>
-          {/* </SidebarGroupContent> */}
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>

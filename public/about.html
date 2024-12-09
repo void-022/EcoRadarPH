@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoRadarPH Info</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .faq-content {
+        max-height: 0; /* Start with collapsed state */
+        overflow: hidden;
+        transition: max-height 0.4s ease-out; /* Smooth transition for max-height */
+      }
+      .faq-content.open {
+        max-height: 1000px;
+      }
+    </style>
+  </head>
+  <body
+    class="flex min-h-screen items-center justify-center bg-gray-100 p-4 pb-64"
+  >
+    <div class="w-full max-w-2xl rounded-lg bg-white shadow-md">
+      <h2 class="mb-4 p-4 text-2xl font-semibold">
+        Frequently Asked Questions
+      </h2>
+      <div class="faq-accordion">
+        <div class="border-b border-gray-200">
+          <button
+            class="w-full p-4 text-left focus:outline-none"
+            onclick="toggleAccordion(this)"
+          >
+            <div class="flex items-center justify-between">
+              <span class="font-medium"
+                >What places or cities are supported?</span
+              >
+              <svg
+                class="h-5 w-5 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </div>
+          </button>
+          <div class="faq-content">
+            <p class="p-4 text-gray-600">
+              EcoRadarPH primarily supports the
+              <span class="font-semibold">Central Luzon</span> and
+              <span class="font-semibold">NCR</span> regions of the Philippines.
+              However, the app should function in other locations by utilizing
+              your device's location data. Please note that in such cases, you
+              may encounter issues like the inability to display your city's
+              name accurately.
+            </p>
+          </div>
+        </div>
+
+        <div class="border-b border-gray-200">
+          <button
+            class="w-full p-4 text-left focus:outline-none"
+            onclick="toggleAccordion(this)"
+          >
+            <div class="flex items-center justify-between">
+              <span class="font-medium"
+                >How can the air quality forecast be interpreted?</span
+              >
+              <svg
+                class="h-5 w-5 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </div>
+          </button>
+          <div class="faq-content">
+            <div class="p-4 text-gray-600">
+              <p class="mb-1">
+                The air quality forecast evaluates key air pollutants,
+                including:
+              </p>
+              <ul class="mb-2">
+                <li>
+                  <span class="font-semibold"
+                    >Particulate Matter PM<sub>10</sub>:</span
+                  >
+                  Larger particles in the air, such as dust or pollen.
+                </li>
+                <li>
+                  <span class="font-semibold"
+                    >Particulate Matter PM<sub>2.5</sub>:</span
+                  >
+                  Fine particles that can penetrate deep into the lungs.
+                </li>
+                <li>
+                  <span class="font-semibold">Nitrogen Dioxide (NO₂):</span> A
+                  harmful gas often emitted by vehicles and industrial
+                  processes.
+                </li>
+                <li>
+                  <span class="font-semibold">Ozone (O₃):</span> A gas formed
+                  when sunlight reacts with pollutants.
+                </li>
+              </ul>
+              These pollutants are measured using the United States Air Quality
+              Index (AQI), which categorizes air quality levels from Good to
+              Hazardous.Refer to the table below for more details about the AQI
+              levels and their health implications.
+              <figure>
+                <img src="./AqiChart.jpg" alt="US Air Quality Index chart" />
+                <figcaption class="text-center italic">
+                  Source:
+                  <a
+                    class="underline"
+                    href="https://www.iqair.com/us/newsroom/what-is-the-difference-between-the-us-aqi-and-who-air-quality-guidelines"
+                    target="_blank"
+                    >IQAir</a
+                  >
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <button
+            class="w-full p-4 text-left focus:outline-none"
+            onclick="toggleAccordion(this)"
+          >
+            <div class="flex items-center justify-between">
+              <span class="font-medium">How was this app developed?</span>
+              <svg
+                class="h-5 w-5 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </div>
+          </button>
+          <div class="faq-content">
+            <p class="p-4 text-gray-600">
+              EcoRadarPH is an open-source project, and you can explore its
+              source code on the
+              <a
+                class="underline"
+                href="https://github.com/void-022/EcoRadarPH"
+                target="_blank"
+                >Github page</a
+              >. The application retrieves forecast data from the
+              <a
+                class="underline"
+                href="https://open-meteo.com/"
+                target="_blank"
+                >Open Meteo API.</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function toggleAccordion(button) {
+        const content = button.nextElementSibling;
+        const icon = button.querySelector("svg");
+
+        // Toggle content's open/closed state
+        if (content.classList.contains("open")) {
+          content.classList.remove("open");
+          icon.style.transform = "rotate(0deg)";
+        } else {
+          content.classList.add("open");
+          icon.style.transform = "rotate(180deg)";
+        }
+      }
+    </script>
+  </body>
+</html>
