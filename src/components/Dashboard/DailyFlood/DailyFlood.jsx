@@ -24,7 +24,7 @@ export default function DailyFlood({
   }
 
   return (
-    <div className="flex min-h-full flex-col justify-between rounded-lg bg-white p-2">
+    <div className="flex min-h-full flex-col justify-between rounded-lg bg-[#9fc3f920] p-2 text-foreground">
       <div className="flex h-10 w-full justify-between">
         <span className="text-lg font-bold">River discharge m³/s</span>
         <DailyDropDown onSelectForecastLength={handleSelectForecastLength} />

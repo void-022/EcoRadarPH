@@ -14,7 +14,7 @@ export default function HourlyDropDown({ onSelectParameter }) {
       <SelectTrigger className="w-[200px] md:w-[280px]">
         <SelectValue placeholder="Select a parameter" />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="text-foreground">
         <SelectGroup>
           <SelectLabel>Weather</SelectLabel>
           <SelectItem

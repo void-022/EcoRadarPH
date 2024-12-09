@@ -42,7 +42,6 @@ export default function UserConfigContextProvider({ children }) {
         userLat: lat,
         userLon: lon,
       };
-      console.log(updatedConfigState);
       localStorage.setItem("userConfig", JSON.stringify(updatedConfigState));
       return updatedConfigState;
     });
@@ -54,7 +53,6 @@ export default function UserConfigContextProvider({ children }) {
         ...prevConfigState,
         theme: theme,
       };
-      console.log(updatedConfigState);
       localStorage.setItem("userConfig", JSON.stringify(updatedConfigState));
       return updatedConfigState;
     });

@@ -143,7 +143,8 @@ function interpretDate(dateString, format) {
 }
 
 export default function Dashboard({ ...props }) {
-  const { userCityName, userLat, userLon } = useContext(UserConfigContext);
+  const { userCityName, userLat, userLon, theme } =
+    useContext(UserConfigContext);
   const [apiData, setApiData] = useState({ weather: "", air: "", flood: "" });
   const [isFetching, setIsFetching] = useState(true);
   const { toast } = useToast();
@@ -194,17 +195,20 @@ export default function Dashboard({ ...props }) {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main {...props} className="flex w-screen flex-col gap-1 md:flex-row">
-        <div className="flex min-h-screen w-full flex-col gap-1 md:w-2/3">
-          <header className="h-1/4 bg-neutral-600 md:h-2/6">
-            <SidebarTrigger />
+      <main
+        {...props}
+        className="flex w-screen flex-col gap-1 bg-background md:flex-row"
+      >
+        <div className="gap-1md:w-2/3 flex min-h-screen w-full flex-col">
+          <header className="h-1/4 md:h-2/6">
+            <SidebarTrigger className="dark:text-accent dark:hover:bg-[#102b41]" />
             <DashboardHeader
               currentData={apiData.weather.current}
               isFetching={isFetching}
               interpretWMO={interpretWMO}
             />
           </header>
-          <section className="h-1/3 bg-slate-400 p-1 md:h-2/6">
+          <section className="h-1/3 p-1 md:h-2/6">
             <DailyWeather
               dailyData={apiData.weather.daily}
               isFetching={isFetching}
@@ -212,7 +216,7 @@ export default function Dashboard({ ...props }) {
               interpretDate={interpretDate}
             />
           </section>
-          <section className="h-2/4 bg-neutral-900 p-1 md:h-1/3">
+          <section className="h-2/4 p-1 md:h-1/3">
             <HourlyForecast
               hourlyData={{
                 weather: apiData.weather.hourly,
@@ -225,14 +229,14 @@ export default function Dashboard({ ...props }) {
         </div>
 
         <aside className="flex min-h-96 w-full flex-col gap-1 border-solid md:w-1/3 md:flex-1">
-          <section className="h-full bg-red-300 p-1 md:h-3/5">
+          <section className="h-full p-1 md:h-3/5">
             <DailyAir
               dailyAirData={apiData.air.hourly}
               isFetching={isFetching}
               interpretDate={interpretDate}
             />
           </section>
-          <section className="h-full bg-slate-400 p-1 md:h-2/5">
+          <section className="h-full p-1 md:h-2/5">
             <DailyFlood
               dailyFloodData={apiData.flood.daily}
               isFetching={isFetching}

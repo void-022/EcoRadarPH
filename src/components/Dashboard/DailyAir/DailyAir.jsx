@@ -43,7 +43,7 @@ export default function DailyAir({ dailyAirData, isFetching, interpretDate }) {
   console.log(dailyAirQuality);
 
   return (
-    <div className="flex h-full max-h-full flex-col justify-between rounded-lg bg-slate-700 p-4">
+    <div className="flex h-full max-h-full flex-col justify-between rounded-lg bg-[#9fc3f920] p-4 text-foreground">
       <div className="mx-auto w-full">
         <h1 className="mb-3 text-xl font-bold">Air Quality Forecast</h1>
         <div className="max-h-[480px] overflow-y-auto">

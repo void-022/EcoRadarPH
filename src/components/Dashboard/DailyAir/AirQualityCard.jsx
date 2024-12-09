@@ -14,9 +14,9 @@ export default function AirQualityCard({ date, aqi, pm10, pm25, no2, o3 }) {
   return (
     <Card className="mb-2 w-full">
       <CardHeader className="-my-2">
-        <CardTitle>{date}</CardTitle>
+        <CardTitle className="text-foreground">{date}</CardTitle>
       </CardHeader>
-      <CardContent className="-mb-1 flex flex-wrap items-center justify-between">
+      <CardContent className="-mb-1 flex flex-wrap items-center justify-between text-foreground">
         <div className="mb-4 flex flex-col items-center sm:mb-0">
           <span className="mb-1 text-sm font-semibold">Air Quality Index</span>
           <CircularProgress
@@ -31,25 +31,25 @@ export default function AirQualityCard({ date, aqi, pm10, pm25, no2, o3 }) {
             <span className="text-sm font-semibold">
               PM<sub>10</sub>
             </span>
-            <p className="text-lg">{pm10} µg/m³</p>
+            <p className="text-base">{pm10} µg/m³</p>
           </div>
           <div>
             <span className="text-sm font-semibold">
               PM<sub>2.5</sub>
             </span>
-            <p className="text-lg">{pm25} µg/m³</p>
+            <p className="text-base">{pm25} µg/m³</p>
           </div>
           <div>
             <span className="text-sm font-semibold">
               NO<sub>2</sub>
             </span>
-            <p className="text-lg">{no2} µg/m³</p>
+            <p className="text-base">{no2} µg/m³</p>
           </div>
           <div>
             <span className="text-sm font-semibold">
               O<sub>3</sub>
             </span>
-            <p className="text-lg">{o3} µg/m³</p>
+            <p className="text-base">{o3} µg/m³</p>
           </div>
         </div>
       </CardContent>

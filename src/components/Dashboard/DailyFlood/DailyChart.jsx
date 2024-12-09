@@ -21,7 +21,7 @@ export default function DailyChart({
   const chartConfig = {
     discharge: {
       label: "River discharge",
-      color: "#2563eb",
+      color: "hsl(var(--chart-2))",
     },
     maxDischarge: {
       label: "Max river discharge",

@@ -13,7 +13,7 @@ export default function DailyDropDown({ onSelectForecastLength }) {
       <SelectTrigger className="w-[200px] md:w-[280px]">
         <SelectValue placeholder="Select duration" />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="text-foreground">
         <SelectGroup>
           <SelectItem value="7">7 days</SelectItem>
           <SelectItem value="14">2 weeks</SelectItem>

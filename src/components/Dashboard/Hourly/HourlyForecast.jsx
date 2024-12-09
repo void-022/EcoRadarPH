@@ -53,7 +53,7 @@ export default function HourlyForecast({
         }));
 
   return (
-    <div className="flex h-full max-h-full flex-col justify-between rounded-lg bg-white p-2">
+    <div className="flex h-full max-h-full flex-col justify-between rounded-lg bg-[#9fc3f920] p-2 text-foreground">
       <div className="flex h-10 w-full justify-between">
         <span className="text-lg font-bold">
           Hourly {selectedParameter.label}

@@ -59,7 +59,11 @@ export default function LocationButton({ ...props }) {
     );
   }
   return (
-    <Button onClick={handleFetchUserLoc} {...props}>
+    <Button
+      className="border-[1px] bg-background hover:bg-accent hover:text-primary dark:border-input dark:hover:text-foreground"
+      onClick={handleFetchUserLoc}
+      {...props}
+    >
       <MapPinned />
       Use Current Location
     </Button>

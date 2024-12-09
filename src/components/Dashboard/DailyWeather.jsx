@@ -38,7 +38,7 @@ export default function DailyWeather({
   }));
 
   return (
-    <div className="flex min-h-full items-center justify-center rounded-lg bg-slate-900 p-1 px-14">
+    <div className="flex min-h-full items-center justify-center rounded-lg bg-[#9fc3f920] p-1 px-14">
       <Carousel
         opts={{
           align: "start",
@@ -53,18 +53,18 @@ export default function DailyWeather({
             >
               <Card className="h-full">
                 <CardContent className="flex items-center justify-center p-6 text-center">
-                  <div className="flex flex-col items-center gap-y-1">
+                  <div className="flex flex-col items-center gap-y-1 text-foreground">
                     <span className="mb-3 text-xl font-semibold">
                       {" "}
                       {day.date}
                     </span>
                     <i
-                      className={`wi ${interpretWMO(day.weatherCode).icon} text-4xl`}
+                      className={`wi ${interpretWMO(day.weatherCode).icon} text-4xl text-secondary`}
                     ></i>
                     <span className="text-sm italic">
                       {interpretWMO(day.weatherCode).interpretation}
                     </span>
-                    <span className="font-semibold text-sky-900">
+                    <span className="font-semibold text-[#330fff] dark:text-[#bca9eb]">
                       {day.precipitationProb}%
                     </span>
                     <span className="text-4xl font-bold">
@@ -79,8 +79,8 @@ export default function DailyWeather({
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        <CarouselPrevious className="text-foreground" />
+        <CarouselNext className="text-foreground" />
       </Carousel>
     </div>
   );

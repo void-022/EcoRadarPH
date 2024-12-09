@@ -1,32 +1,15 @@
 import { useContext } from "react";
-import {
-  Settings,
-  Github,
-  Info,
-  MapPinned,
-  ExternalLink,
-  // Check,
-  // ChevronsUpDown,
-} from "lucide-react";
+import { Settings, Github, Info, ExternalLink } from "lucide-react";
 
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
-  SidebarGroupContent,
   SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 
 import {
   Sheet,
@@ -58,7 +41,7 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>EcoRadarPH</SidebarGroupLabel>
-          <SidebarMenu>
+          <SidebarMenu className="border-none">
             <SidebarMenuItem>
               <Sheet>
                 <SheetTrigger className="w-full">
@@ -94,7 +77,7 @@ export function AppSidebar() {
                           <SelectTrigger className="w-[180px]">
                             <SelectValue placeholder="Theme" />
                           </SelectTrigger>
-                          <SelectContent>
+                          <SelectContent className="text-foreground">
                             <SelectItem value="light">Light</SelectItem>
                             <SelectItem value="dark">Dark</SelectItem>
                             <SelectItem value="system">System</SelectItem>
@@ -107,38 +90,10 @@ export function AppSidebar() {
               </Sheet>
             </SidebarMenuItem>
 
-            {/* <SidebarMenuItem>
-              <SidebarMenuButton>
-                <a
-                  href="https://github.com/void-022"
-                  className="flex items-center" // Flex container with spacing
-                  target="_blank"
-                >
-                  <Github className="h-[1.2em]" />
-                  <span>Github</span>
-                  <ExternalLink className="ml-1 h-[0.8em]" />
-                </a>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <a
-                  href="#"
-                  className="flex items-center" // Flex container with spacing
-                  target
-                >
-                  <Info className="h-[1.2em]" />
-                  <span>Information</span>
-                  <ExternalLink className="ml-1 h-[0.8em]" />
-                </a>
-              </SidebarMenuButton>
-            </SidebarMenuItem> */}
-
-            <SidebarMenuItem>
+            <SidebarMenuItem className="">
               <a
                 href="https://github.com/void-022/EcoRadarPH"
-                className="flex items-center rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+                className="flex items-center rounded-md p-1 hover:bg-ring focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
                 target="_blank"
               >
                 <Github className="ml-1 h-[1em]" />
@@ -149,11 +104,11 @@ export function AppSidebar() {
             <SidebarMenuItem>
               <a
                 href="../../about.html"
-                className="flex items-center rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+                className="flex items-center rounded-md p-1 hover:bg-ring focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
                 target="_blank"
               >
                 <Info className="ml-1 h-[1em]" />
-                <span className="text-base">About EcoTrackPH</span>
+                <span className="text-base">About EcoRadarPH</span>
                 <ExternalLink className="ml-1 h-[0.7em]" />
               </a>
             </SidebarMenuItem>
